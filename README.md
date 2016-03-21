@@ -33,7 +33,6 @@ class App extends React.Component {
 /**
  * We wrap our root component (App in this case)
  * around a ContextProvider before rendering
- * @returns {Component}
  */
 import React from 'react';
 
@@ -80,6 +79,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {connect} from 'mobx-connect';
 
+// If connect contains no arguments then
+// default arguments are used: state, store, cache, router
 @connect
 class App extends React.Component {
     render() {
@@ -96,7 +97,6 @@ class App extends React.Component {
 /**
  * But first we need to wrap our root component (App in this case)
  * around a ContextProvider before rendering
- * @returns {Component}
  */
 import React from 'react';
 import {contextTypes} from 'mobx-connect';
@@ -104,7 +104,7 @@ import {contextTypes} from 'mobx-connect';
 class ContextProvider extends React.Component {
 
     // Here we are using default context types
-    // See Example 2 for using custom contexts
+    // See Example 1 for using custom contexts
     static childContextTypes = contextTypes;
 
     getChildContext() {
