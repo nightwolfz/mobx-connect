@@ -14,7 +14,7 @@ var defaultContextTypes = {
  * @returns {Object}
  */
 function createContextTypes(ctxTypes) {
-    return ctxTypes.reduce((obj, ctxItem) => {
+    return ctxTypes.reduce(function(obj, ctxItem) {
         obj[ctxItem] = function() {}
         return obj
     }, {});
