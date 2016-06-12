@@ -1,6 +1,6 @@
 # mobx-connect
 
-Super simple and lightweight [MobX](https://github.com/mobxjs/mobx) `@connect` decorator for react components.
+Super lightweight (2 kb uncompressed) [MobX](https://github.com/mobxjs/mobx) `@connect` decorator for react components.
 Similar to `@connect` from react-redux.
 
 ## Idea
@@ -14,13 +14,17 @@ By decorating your react component with `@connect` 2 things happen:
 ## Installation
 
     npm install mobx-connect --save
-    
-    
-    
+
+
+
 ## Usage example
+
 ```js
+const React = require('react')
+const { connect } = require('mobx-connect')
+
 @connect
-class Settings extends React.Component {
+class App extends React.Component {
 
     setSetting(key) {
         const { settings} = this.context.state
@@ -50,16 +54,18 @@ class Settings extends React.Component {
 
 
 ## Configuration
+
 First we need to wrap our root component (App in this case)
-around a ContextProvider before rendering. You can call this file ContextProvider.js
- 
+around a ContextProvider before rendering. You can call this file `ContextProvider.js`
+
+_If you are using react-router, you might want to use their `createElement` property
+to wrap routed components with the ContextProvider_
+
 ```js
-import React from 'react';
-import {contextTypes} from 'mobx-connect';
+const React = require('react')
+const { contextTypes } = require('mobx-connect')
 
 class ContextProvider extends React.Component {
-    static childContextTypes = contextTypes;
-    
     getChildContext() {
         return this.props.context;
     }
@@ -67,19 +73,25 @@ class ContextProvider extends React.Component {
         return this.props.children;
     }
 }
+
+ContextProvider.childContextTypes = contextTypes;
 ```
 
 Then we define our default state and our store methods which affect the state.
 
 ```js
+const { observable } = require('mobx')
+
 const context = {
     // An observable mobx object
-    state: {
+    state: observable({
         username: ''
-    },
-    // Your actions
+    }),
     store: {
-        // Your methods here
+        // Your methods that affect the state here
+        // You can make this object deeper for more complicated structures
+        // or import from another file
+
         setUsername(username) {
             context.state.username = username;
         },
@@ -91,6 +103,7 @@ const context = {
 ```
 
 Finally we inject context into our app and render HTML on the browser
+
 ```js
 ReactDOM.render(<ContextProvider context={context}>
     <App/>
@@ -99,58 +112,34 @@ ReactDOM.render(<ContextProvider context={context}>
 
 
 
-## Another Example (using a custom context)
+## Using with React-router
 
 ```js
-import React from 'react';
-import ReactDOM from 'react-dom';
-import {connect} from 'mobx-connect';
+const React = require('react')
+const ReactDOM = require('react-dom')
+const { observable } = require('mobx')
+const { Router, RouterContext, browserHistory } = require('react-router')
+const ContextProvider = require('./ContextProvider') // or where ever you put it
+const routes = require('./routes') // or where ever you put it
 
-@connect('sayHello', 'sayGoodBye')
-class App extends React.Component {
-    render() {
-        const { sayHello, sayGoodBye } = this.context;
-
-        return <div>{sayHello()} and maybe {sayGoodBye()}</div>
-    }
-}
-
-/**
- * We wrap our root component (App in this case)
- * around a ContextProvider before rendering
- */
-import React from 'react';
-
-class ContextProvider extends React.Component {
-
-    // Here we are passing a custom contextType to @connect
-    static childContextTypes = {
-        sayHello: React.PropTypes.func,
-        sayGoodBye: React.PropTypes.func
-    };
-
-    getChildContext() {
-        return this.props.context;
-    }
-    render() {
-        return this.props.children
-    }
-}
-
-/**
- * Then we put it all together.
- * Initialize stores & inject state into our context
- */
 const context = {
-    sayHello: function() { return 'Hello...'; },
-    sayGoodBye: function() { return 'sayGoodBye !'; }
+    state: observable({}),
+    store: {}
+}
+
+function createElement(props) {
+    return <ContextProvider context={context}>
+        <RouterContext {...props} />
+    </ContextProvider>
 }
 
 // Render HTML on the browser
-ReactDOM.render(<ContextProvider context={context}>
-    <App/>
-</ContextProvider>, document.getElementById('content'));
+ReactDOM.render(<Router history={browserHistory}
+               render={createElement}
+               routes={routes}/>,
+document.getElementById('container'))
 ```
+
 
 # Author
 

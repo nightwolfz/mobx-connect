@@ -1,37 +1,47 @@
 {
   "name": "mobx-connect",
-  "version": "0.0.3",
+  "version": "0.1.0",
   "description": "MobX @connect decorator for your react components",
   "main": "src/connect.js",
-  "scripts": {},
+  "scripts": {
+    "test": "mocha ./test"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/nightwolfz/mobx-connect.git"
   },
   "keywords": [
     "react",
+    "reactjs",
     "reactive",
     "connect",
     "context",
-    "stores",
+    "store",
+    "state",
     "redux",
     "mobx",
     "mobx-connect",
     "mobservable",
     "observable",
-    "flux",
-    "ryan",
-    "preact",
-    "inferno"
+    "flux"
   ],
-  "author": "Ryan Megidov",
+  "author": "Ryan Megidov <ryan@megidov.com>",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/nightwolfz/mobx-connect/issues"
   },
   "homepage": "https://github.com/nightwolfz/mobx-connect#readme",
   "dependencies": {
-    "mobx": "^2.0",
-    "mobx-react": "^3.0"
+    "mobx": "*",
+    "mobx-react": "*"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "enzyme": "^2.3.0",
+    "mocha": "^2.5.3",
+    "react": "^15.1.0",
+    "react-addons-test-utils": "^15.1.0",
+    "react-dom": "^15.1.0",
+    "sinon": "^1.17.4"
   }
 }
