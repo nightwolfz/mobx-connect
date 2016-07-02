@@ -20,21 +20,18 @@ ContextProvider.childContextTypes = {
 // Our components created for testing purposes
 class ParentComponent extends Component {
     render() {
-        return h('main', this.props,
+        const { props } = this;
+        return h('div', props,
             [
-                h('button', { key: 'button-key' }, this.props.title),
-                h(ChildComponent, { key: 'child-key'})
+                h('h1', { key: '1' }, props.title),
+                props.children ? h(props.children, { key: '2'}) : null
             ]
         );
     }
 }
 
-class ChildComponent extends Component {
-    render() {
-        return h('div', null,
-            h('p', null, this.context.state.toggle ? '--ON' : '--OFF')
-        );
-    }
+function ChildComponent(props, context) {
+    return h('p', null, 'Some text here');
 }
 
 exports.ContextProvider = ContextProvider

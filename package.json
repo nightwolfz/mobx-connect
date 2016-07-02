@@ -1,6 +1,6 @@
 {
   "name": "mobx-connect",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "MobX @connect decorator for your react components",
   "main": "src/connect.js",
   "scripts": {
@@ -39,9 +39,9 @@
     "chai": "^3.5.0",
     "enzyme": "^2.3.0",
     "mocha": "^2.5.3",
-    "react": "^15.1.0",
-    "react-addons-test-utils": "^15.1.0",
-    "react-dom": "^15.1.0",
+    "react": "^15.2.0",
+    "react-addons-test-utils": "^15.2.0",
+    "react-dom": "^15.2.0",
     "sinon": "^1.17.4"
   }
 }

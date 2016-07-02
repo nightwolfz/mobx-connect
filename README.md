@@ -3,18 +3,17 @@
 Super lightweight (2 kb uncompressed) [MobX](https://github.com/mobxjs/mobx) `@connect` decorator for react components.
 Similar to `@connect` from react-redux.
 
-## Idea
-
-By decorating your react component with `@connect` 2 things happen:
-
-+ Your components becomes observable (@observable is added automatically to the component, so no need to define it).
-+ Your state and the store actions you defined become accessible from Reacts' context.
-+ Any changes to the state automatically and efficiently update the component.
-
 ## Installation
 
     npm install mobx-connect --save
 
+
+## How it works
+
+By decorating your react component with `@connect` 2 things happen:
+
++ Your components becomes observable (so no need to define @observable, since @connect does it for you).
++ Your state and the store actions are inject into `this.context`.
 
 
 ## Usage example
@@ -26,7 +25,7 @@ const { connect } = require('mobx-connect')
 @connect
 class App extends React.Component {
 
-    setSetting(key) {
+    toggleSetting(key) {
         const { settings} = this.context.state
         settings[key] = !settings[key]
     }
@@ -35,19 +34,26 @@ class App extends React.Component {
         const { settings } = this.context.state
 
         return <div>
-            <p>
-                <a onClick={() => this.setSetting('fullscreen')}>
-                    Turn {settings.fullscreen ? 'OFF' : 'ON'}
-                </a>
-            </p>
-            <p>
-                <a onClick={() => this.setSetting('logger')}>
-                    Turn {settings.logger ? 'OFF' : 'ON'}
-                </a>
-            </p>
+            <SettingsView/>
+            <button onClick={() => this.toggleSetting('fullscreen')}>
+                Turn {settings.fullscreen ? 'OFF' : 'ON'}
+            </button>
+            <button onClick={() => this.toggleSetting('logger')}>
+                Turn {settings.logger ? 'OFF' : 'ON'}
+            </button>
         </div>
     }
 }
+
+const SettingsView = connect(function(props, context) {
+    const { settings } = context.state
+
+    return <div>
+        <h1>Settings</h1>
+        <p>Fullscreen: {settings.fullscreen ? 'OFF' : 'ON'}</p>
+        <p>Logger: {settings.fullscreen ? 'OFF' : 'ON'}</p>
+    </div>
+})
 ```
 
 
@@ -55,11 +61,8 @@ class App extends React.Component {
 
 ## Configuration
 
-First we need to wrap our root component (App in this case)
-around a ContextProvider before rendering. You can call this file `ContextProvider.js`
-
-_If you are using react-router, you might want to use their `createElement` property
-to wrap routed components with the ContextProvider_
+First create a file called `ContextProvider.js`.
+We need to wrap our root component (`App` in this case) around this `ContextProvider` before rendering.
 
 ```js
 const React = require('react')
@@ -91,12 +94,8 @@ const context = {
         // Your methods that affect the state here
         // You can make this object deeper for more complicated structures
         // or import from another file
-
         setUsername(username) {
             context.state.username = username;
-        },
-        getUsername() {
-            return context.state.username;
         }
     }
 }
