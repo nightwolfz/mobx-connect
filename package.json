@@ -1,6 +1,6 @@
 {
   "name": "mobx-connect",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "MobX @connect decorator for your react/inferno components",
   "main": "index.js",
   "scripts": {
