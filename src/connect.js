@@ -1,12 +1,22 @@
 'use strict';
 
-var mobxReact = require('mobx-react');
+var mobxBinding;
 var defaultContextTypes = {
-    router: function() {},
     state: function() {},
-    store: function() {},
-    cache: function() {}
+    store: function() {}
 }
+
+module.exports = function(bindings) {
+    mobxBinding = bindings;
+
+    return {
+        connect: connect,
+        provide: provide,
+        observer: mobxBinding.observer,
+        contextTypes: defaultContextTypes
+    }
+}
+
 
 /**
  * Create contextTypes object from an array of strings.
@@ -20,19 +30,19 @@ function createContextTypes(ctxTypes) {
     }, {});
 }
 
-function composeWithContext(args, makeObservable) {
+function composeWithContext(args) {
     if (args && args.length) {
 
         // @connect / The first argument is the component.
         if (typeof args[0] === 'function') {
             args[0].contextTypes = defaultContextTypes;
-            return makeObservable ? mobxReact.observer(args[0]) : args[0]
+            return mobxBinding.observer(args[0])
         }
 
         // @connect('store', 'state', ''...) / Custom context
         return function(component) {
             component.contextTypes = createContextTypes(args);
-            return makeObservable ? mobxReact.observer(component) : component
+            return mobxBinding.observer(component)
         }
 
     } else {
@@ -40,7 +50,7 @@ function composeWithContext(args, makeObservable) {
         // @connect() / Use default context
         return function(component) {
             component.contextTypes = defaultContextTypes;
-            return makeObservable ? mobxReact.observer(component) : component
+            return mobxBinding.observer(component)
         }
     }
 }
@@ -51,7 +61,7 @@ function composeWithContext(args, makeObservable) {
  * @returns {Function|Class}
  */
 function connect() {
-    return composeWithContext(Array.prototype.slice.call(arguments), true)
+    return composeWithContext(Array.prototype.slice.call(arguments))
 }
 
 /**
@@ -60,9 +70,6 @@ function connect() {
  * @returns {Component|Object}
  */
 function provide() {
-    return composeWithContext(Array.prototype.slice.call(arguments), false)
+    if (console) console.warn('@provide is now deprecated. Use @connect instead');
+    return composeWithContext(Array.prototype.slice.call(arguments))
 }
-
-exports.connect = connect;
-exports.provide = provide;
-exports.contextTypes = defaultContextTypes;
