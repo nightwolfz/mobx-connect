@@ -1,6 +1,16 @@
 # mobx-connect
 
-Super lightweight (2 kb uncompressed) [MobX](https://github.com/mobxjs/mobx) `@connect` decorator for react components.
+<p>&nbsp;</p>
+<p align="center">
+<img src="http://infernojs.org/img/inferno.png" width="150px">
+<font size="20">&nbsp; + &nbsp;</font>
+<img src="https://raw.githubusercontent.com/mobxjs/mobx/master/docs/mobx.png" width="150px">
+<font size="20">&nbsp; + </font>
+<img src="https://camo.githubusercontent.com/d18a06dffe0778d6be8b91f4e0cd5a18d5287063/687474703a2f2f7777772e6e6967656c736d6974682e636f2f696d616765732f72656163746a732e706e67" width="150px">
+</p>
+<p>&nbsp;</p>
+
+Super lightweight (2 kb uncompressed) [MobX](https://github.com/mobxjs/mobx) `@connect` decorator for react/inferno components.
 Similar to `@connect` from react-redux.
 
 ## Installation
@@ -10,7 +20,7 @@ Similar to `@connect` from react-redux.
 
 ## How it works
 
-By decorating your react component with `@connect` 2 things happen:
+By decorating your react/inferno component with `@connect` 2 things happen:
 
 + Your components becomes observable (so no need to define @observable, since @connect does it for you).
 + Your state and the store actions are inject into `this.context`.
@@ -18,8 +28,8 @@ By decorating your react component with `@connect` 2 things happen:
 
 ## Usage example
 
-```js
-const React = require('react')
+```javascript
+const React = require('react') // or inferno
 const { connect } = require('mobx-connect')
 
 @connect
@@ -64,7 +74,7 @@ const SettingsView = connect(function(props, context) {
 First create a file called `ContextProvider.js`.
 We need to wrap our root component (`App` in this case) around this `ContextProvider` before rendering.
 
-```js
+```javascript
 const React = require('react')
 const { contextTypes } = require('mobx-connect')
 
@@ -82,7 +92,7 @@ ContextProvider.childContextTypes = contextTypes;
 
 Then we define our default state and our store methods which affect the state.
 
-```js
+```javascript
 const { observable } = require('mobx')
 
 const context = {
@@ -103,7 +113,7 @@ const context = {
 
 Finally we inject context into our app and render HTML on the browser
 
-```js
+```javascript
 ReactDOM.render(<ContextProvider context={context}>
     <App/>
 </ContextProvider>, document.getElementById('content'));
@@ -113,7 +123,7 @@ ReactDOM.render(<ContextProvider context={context}>
 
 ## Using with React-router
 
-```js
+```javascript
 const React = require('react')
 const ReactDOM = require('react-dom')
 const { observable } = require('mobx')

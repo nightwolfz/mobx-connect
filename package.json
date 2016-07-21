@@ -2,6 +2,7 @@
   "name": "mobx-connect",
   "version": "0.1.4",
   "description": "MobX @connect decorator for your react/inferno components",
+  "main": "index.js",
   "scripts": {
     "test": "mocha ./test"
   },

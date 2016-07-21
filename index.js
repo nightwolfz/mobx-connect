@@ -1,9 +1,13 @@
 'use strict';
 
-var mobxReact = require('mobx-react');
+var mobxConnect;
 
-if (!mobxReact) throw new Error('mobx-connect requires mobx-react to be installed');
-
-var mobxConnect = require('./src/connect')(mobxReact);
+try {
+    var mobxReact = require('mobx-react');
+    mobxConnect = require('./src/connect')(mobxReact);
+} catch(e) {
+    var mobxInferno = require('mobx-inferno');
+    mobxConnect = require('./src/connect')(mobxInferno);
+}
 
 module.exports = mobxConnect;
