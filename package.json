@@ -34,9 +34,7 @@
   },
   "homepage": "https://github.com/nightwolfz/mobx-connect#readme",
   "peerDependencies": {
-    "mobx": "*"
-  },
-  "optionalDependencies": {
+    "mobx": "*",
     "mobx-inferno": "*",
     "mobx-react": "*"
   },
