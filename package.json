@@ -33,6 +33,11 @@
     "url": "https://github.com/nightwolfz/mobx-connect/issues"
   },
   "homepage": "https://github.com/nightwolfz/mobx-connect#readme",
+  "dependencies": {
+    "mobx": "*",
+    "mobx-inferno": "*",
+    "mobx-react": "*"
+  },
   "peerDependencies": {
     "mobx": "*",
     "mobx-inferno": "*",
