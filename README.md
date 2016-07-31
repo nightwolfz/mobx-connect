@@ -26,11 +26,11 @@ By decorating your react/inferno component with `@connect` 2 things happen:
 + Your state and the store actions are inject into `this.context`.
 
 
-## Usage example
+## Usage example (React.JS)
 
 ```javascript
-const React = require('react') // or inferno
-const { connect } = require('mobx-connect')
+import React from 'react'
+import { connect } from 'mobx-connect'
 
 @connect
 class App extends React.Component {
@@ -67,7 +67,18 @@ const SettingsView = connect(function(props, context) {
 ```
 
 
+## Usage example (inferno.JS)
 
+```javascript
+import Inferno from 'inferno'
+import Component from 'inferno-component'
+import { connect } from 'mobx-connect/inferno' // <----
+
+@connect
+class App extends Component {
+    // Everything else same as with React...
+}
+```
 
 ## Configuration
 
@@ -121,7 +132,7 @@ ReactDOM.render(<ContextProvider context={context}>
 
 
 
-## Using with React-router
+## Usage with React-router
 
 ```javascript
 const React = require('react')
@@ -149,6 +160,31 @@ ReactDOM.render(<Router history={browserHistory}
 document.getElementById('container'))
 ```
 
+## Usage with Inferno-router
+
+```javascript
+import Inferno from 'inferno'
+import Component from 'inferno-component'
+import InfernoDOM from 'inferno-dom'
+import { observable } from 'mobx'
+import ContextProvider from './ContextProvider'
+import routes from './routes'
+
+const context = {
+    state: observable({}),
+    store: {}
+}
+// Render HTML on the browser
+InfernoDOM.render(<ContextProvider context={context}>
+    {routes}
+</ContextProvider>,
+document.getElementById('root'))
+
+ReactDOM.render(<Router history={browserHistory}
+               render={createElement}
+               routes={routes}/>,
+document.getElementById('container'))
+```
 
 # Author
 
