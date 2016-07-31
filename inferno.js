@@ -5,12 +5,12 @@ Object.defineProperty(exports, "__esModule", {
 });
 
 try {
-    var mobxBinding = require('mobx-react');
+    var mobxBinding = require('mobx-inferno');
     var mobxConnect = require('./src/connect')(mobxBinding);
 } catch(e) {
     console.error('WARNING:',
-    'You need to have `mobx-react` installed.\n',
-    'Example: npm install mobx-react --save')
+    'You need to have `mobx-inferno` installed.\n',
+    'Example: npm install mobx-inferno --save')
 }
 
 exports.default = mobxConnect;
