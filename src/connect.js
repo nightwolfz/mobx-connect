@@ -2,6 +2,7 @@
 
 var mobxBinding;
 var defaultContextTypes = {
+    router: function() {}, // for react-router
     state: function() {},
     store: function() {}
 }
