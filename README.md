@@ -17,6 +17,16 @@ Similar to `@connect` from react-redux.
 
     npm install mobx-connect --save
 
+You also need to have either `mobx-react` or `mobx-inferno` installed 
+since we don't bundle the dependencies with this package.
+
+    npm install -i mobx-react
+    
+or
+    
+    npm install -i mobx-inferno
+    
+**You can't have both.**
 
 ## How it works
 
@@ -82,7 +92,7 @@ class App extends Component {
 
 ## Configuration
 
-First create a file called `ContextProvider.js`.
+Ccreate a file called `ContextProvider.js`.
 We need to wrap our root component (`App` in this case) around this `ContextProvider` before rendering.
 
 ```javascript
