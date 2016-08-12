@@ -8,8 +8,7 @@ try {
     var mobxBinding = require('mobx-inferno');
     var mobxConnect = require('./src/connect')(mobxBinding);
 } catch(e) {
-    console.error('WARNING:',
-    'You need to have `mobx-inferno` installed.\n',
+    console.error('WARNING: You need to have `mobx-inferno` installed.\n',
     'Example: npm install mobx-inferno --save')
 }
 
