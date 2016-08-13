@@ -3,6 +3,7 @@
 var mobxBinding;
 var defaultContextTypes = {
     router: function() {},
+    action: function() {},
     state: function() {},
     store: function() {}
 }
