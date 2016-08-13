@@ -5,7 +5,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 
 try {
-    var mobxBinding = module.require('mobx-react');
+    var mobxBinding = require('mobx-react');
     var mobxConnect = require('./src/connect')(mobxBinding);
 } catch(e) {
     console.error(e.toString())
