@@ -1,5 +1,5 @@
 const { PropTypes, Component, createElement: h } = require('react')
-const { connect } = require('../../src/connect')
+const { connect } = require('../../index.js')
 
 // Our context provider
 class ContextProvider extends Component {

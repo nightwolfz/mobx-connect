@@ -1,6 +1,6 @@
 {
   "name": "mobx-connect",
-  "version": "0.3.7",
+  "version": "0.3.8",
   "description": "MobX @connect decorator for your react/inferno components",
   "main": "index.js",
   "scripts": {
@@ -33,11 +33,20 @@
     "url": "https://github.com/nightwolfz/mobx-connect/issues"
   },
   "homepage": "https://github.com/nightwolfz/mobx-connect#readme",
-  "dependencies": {},
+  "dependencies": {
+    "mobx": "2.x",
+    "mobx-inferno": "^0.1.x",
+    "mobx-react": "^3.5.x"
+  },
+  "peerDependencies": {
+    "mobx": "2.x",
+    "mobx-inferno": "^0.1.x",
+    "mobx-react": "^3.5.x"
+  },
   "devDependencies": {
     "chai": "^3.5.0",
     "enzyme": "^2.4.1",
-    "mocha": "^2.5.3",
+    "mocha": "^3.0.2",
     "react": "^15.x.x",
     "react-addons-test-utils": "^15.x.x",
     "react-dom": "^15.x.x",
