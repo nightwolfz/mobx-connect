@@ -15,16 +15,16 @@ Similar to `@connect` from react-redux.
 
 ## Installation
 
-    npm install mobx-connect --save
+    npm install --save mobx-connect
 
 You also **need to have** either `mobx-react` or `mobx-inferno` installed 
-since we don't bundle those dependencies with this package.
+since we don't bundle the dependencies with this package.
 
-    npm install -i mobx-react
+    npm install --save mobx-react
     
 or
     
-    npm install -i mobx-inferno
+    npm install --save mobx-inferno
     
 **You can't have both.**
 
