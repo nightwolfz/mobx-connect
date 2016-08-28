@@ -1,6 +1,19 @@
+### DEPRECATED
+
+Now that MobX has Provider support, you should use that instead.
+
+For React:
+[mobx-react](https://github.com/mobxjs/mobx-react)
+
+For Inferno:
+[mobx-inferno](https://github.com/nightwolfz/mobx-inferno)
+
 # mobx-connect
 
 <p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+
 <p align="center">
 <img src="http://infernojs.org/img/inferno.png" width="150px">
 <font size="20">&nbsp; + &nbsp;</font>
